@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<vector<int>> ans;
+
+    void solve(int index, vector<int>& nums, vector<int>& temp) {
+        // Every state is a valid subset
+        ans.push_back(temp);
+
+        for (int i = index; i < nums.size(); i++) {
+            temp.push_back(nums[i]);      // Choose
+            solve(i + 1, nums, temp);     // Explore
+            temp.pop_back();              // Backtrack
+        }
+    }
+
+    vector<vector<int>> subsets(vector<int>& nums) {
+        vector<int> temp;
+        solve(0, nums, temp);
+        return ans;
+    }
+};
